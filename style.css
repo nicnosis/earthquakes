@@ -1,7 +1,17 @@
 body {
     margin: 0;
+    background-color: #e0e8e9;
+    font-family: 'Arial', sans-serif;
 }
 #map {
-    width: 100vw;
-    height: 100vh;
+    width: 1200px;
+    height: 900px;
+}
+#info {
+    width: 600px;
+    padding: 1em;
+}
+
+.dot {
+    fill: #de2d26;
 }

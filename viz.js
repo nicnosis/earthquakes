@@ -1,4 +1,5 @@
 var baseUrl = 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmFndWlycmUiLCJhIjoiY2l6bmJrMmgwMDJjYTMxcGN3ZHViNnd2YyJ9.RwENG4rnNh44w6ktZEYFRQ';
+// var baseUrl = 'https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmFndWlycmUiLCJhIjoiY2l6bmJrMmgwMDJjYTMxcGN3ZHViNnd2YyJ9.RwENG4rnNh44w6ktZEYFRQ';
 var map = L.map('map').setView([-0, 0], 2);
 var mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 L.tileLayer(
@@ -32,9 +33,10 @@ d3.json("eq.json", function(collection) {
     var feature = g.selectAll("circle")
             .data(collection)
             .enter().append("circle")
+            .attr("class", "dot")
             .style("stroke", "rgba(255,255,255,.5)")
-            .style("opacity", .4)
-            .style("fill", "crimson")
+            .style("opacity", .6)
+            // .style("fill", "crimson")
             .attr("r", d => rScale(d.mag));
 
     map.on("viewreset", update);
