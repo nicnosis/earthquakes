@@ -13,5 +13,10 @@ body {
 }
 
 .dot {
-    fill: #de2d26;
+    stroke: rgba(255,255,255,.5);
+    opacity: 0.6;
+}
+.highlighted {
+    fill: #3182bd;
+    stroke: rgba(0, 0, 0, 1);
 }

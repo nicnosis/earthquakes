@@ -15,29 +15,26 @@ map._initPathRoot()
 var svg = d3.select("#map").select("svg");
 var g = svg.append("g");
 
-//	var rScale = d3.scale.sqrt().range([1, 10]);
-var rScale = d3.scale.sqrt().range([2, 20]);
+var rScale = d3.scale.sqrt().range([4, 20]);
 
 d3.json("eq.json", function(collection) {
     /* Add a LatLng object to each item in the dataset */
     collection.forEach(function(d) {
         d.LatLng = new L.LatLng(d.latitude, d.longitude);
-        d.mag = +d.mag;
-        d.mag = Math.sqrt(Math.pow(d.mag, 10));
-        console.log(d.mag);
+        d.mag = +d.mag; // force numeric
+        d.mag = Math.sqrt(Math.pow(d.mag, 10)); // adjust for log scale
     });
 
-//        rScale.domain(d3.extent(collection, function(d) { return d.mag; }));
     rScale.domain(d3.extent(collection, d => d.mag));
 
     var feature = g.selectAll("circle")
-            .data(collection)
-            .enter().append("circle")
-            .attr("class", "dot")
-            .style("stroke", "rgba(255,255,255,.5)")
-            .style("opacity", .6)
-            // .style("fill", "crimson")
-            .attr("r", d => rScale(d.mag));
+        .data(collection)
+        .enter().append("circle")
+        .attr("class", "dot")
+        .attr("fill", "#de2d26")
+        .attr("r", d => rScale(d.mag))
+        .on("mouseover", mouseover)
+        .on("mouseout", mouseout);
 
     map.on("viewreset", update);
     update();
@@ -51,4 +48,11 @@ d3.json("eq.json", function(collection) {
             }
         )
     }
-})
+});
+
+function mouseover(d) {
+    d3.select(this).transition().attr("fill", "#3182bd");
+}
+function mouseout(d) {
+    d3.select(this).transition().attr("fill", "#de2d26");
+}
