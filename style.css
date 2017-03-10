@@ -1,11 +1,14 @@
 body {
     margin: 0;
-    background-color: #e0e8e9;
+    background-color: #eee;
     font-family: 'Arial', sans-serif;
 }
 #map {
     width: 1200px;
     height: 900px;
+    -webkit-box-shadow: 3px 3px 3px rgba(60, 60, 60, 0.2);
+    -moz-box-shadow: 3px 3px 3px rgba(60, 60, 60, 0.2);
+    box-shadow: 3px 3px 3px rgba(60, 60, 60, 0.2);
 }
 #info {
     width: 600px;

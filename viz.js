@@ -24,6 +24,7 @@ d3.json("eq.json", function(collection) {
         d.mag = +d.mag; // force numeric
         d.mag = Math.sqrt(Math.pow(d.mag, 10)); // adjust for log scale
     });
+    collection.sort(function(a, b) {return b.mag - a.mag;}); // highest magnitude first to prevent occlusion
 
     rScale.domain(d3.extent(collection, d => d.mag));
 
