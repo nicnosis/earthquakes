@@ -59,9 +59,11 @@ function mouseover(d) {
         .attr("fill", "#3182bd")
         .attr("opacity", 1)
         .attr("stroke", "#000");
+
     // populate info
     d3.select("#place").text(d.place);
-    d3.select("#time").text(d.time);
+    var t = moment(d.time).format("YYYY MMM Do, h:mm a");
+    d3.select("#time").text(t);
 
     // Show two decimal places if magnitude is less than one
     var magnitude = (d.mag > 1) ? d.mag.toFixed(1) : d.mag.toFixed(2);
