@@ -22,11 +22,11 @@ d3.json("eq.json", function(collection) {
     collection.forEach(function(d) {
         d.LatLng = new L.LatLng(d.latitude, d.longitude);
         d.mag = +d.mag; // force numeric
-        d.mag = Math.sqrt(Math.pow(d.mag, 10)); // adjust for log scale
+        d.admag = Math.sqrt(Math.pow(d.mag, 10)); // adjusted magnitude for log scale
     });
     collection.sort(function(a, b) {return b.mag - a.mag;}); // highest magnitude first to prevent occlusion
 
-    rScale.domain(d3.extent(collection, d => d.mag));
+    rScale.domain(d3.extent(collection, d => d.admag));
 
     var feature = g.selectAll("circle")
         .data(collection)
@@ -35,7 +35,7 @@ d3.json("eq.json", function(collection) {
         .attr("opacity", 0.5)
         .attr("fill", "#de2d26")
         .attr("stroke", "rgba(255,255,255,.5)")
-        .attr("r", d => rScale(d.mag))
+        .attr("r", d => rScale(d.admag))
         .on("mouseover", mouseover)
         .on("mouseout", mouseout);
 
@@ -62,7 +62,9 @@ function mouseover(d) {
     // populate info
     d3.select("#place").text(d.place);
     d3.select("#time").text(d.time);
-    var magnitude = (d.mag > 1) ? d.mag.toFixed(0) : d.mag.toFixed(2);
+
+    // Show two decimal places if magnitude is less than one
+    var magnitude = (d.mag > 1) ? d.mag.toFixed(1) : d.mag.toFixed(2);
     d3.select("#mag span").text(magnitude);
 }
 function mouseout(d) {
