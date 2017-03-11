@@ -31,8 +31,10 @@ d3.json("eq.json", function(collection) {
     var feature = g.selectAll("circle")
         .data(collection)
         .enter().append("circle")
-        .attr("class", "dot")
+        // .attr("class", "dot")
+        .attr("opacity", 0.5)
         .attr("fill", "#de2d26")
+        .attr("stroke", "rgba(255,255,255,.5)")
         .attr("r", d => rScale(d.mag))
         .on("mouseover", mouseover)
         .on("mouseout", mouseout);
@@ -52,8 +54,21 @@ d3.json("eq.json", function(collection) {
 });
 
 function mouseover(d) {
-    d3.select(this).transition().attr("fill", "#3182bd");
+    d3.select(this)
+        .transition().duration(100)
+        .attr("fill", "#3182bd")
+        .attr("opacity", 1)
+        .attr("stroke", "#000");
+    // populate info
+    d3.select("#place").text(d.place);
+    d3.select("#time").text(d.time);
+    var magnitude = (d.mag > 1) ? d.mag.toFixed(0) : d.mag.toFixed(2);
+    d3.select("#mag span").text(magnitude);
 }
 function mouseout(d) {
-    d3.select(this).transition().attr("fill", "#de2d26");
+    d3.select(this)
+        .transition().duration(100)
+        .attr("fill", "#de2d26")
+        .attr("opacity", 0.5)
+        .attr("stroke", "rgba(255,255,255,.5)");
 }

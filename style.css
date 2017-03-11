@@ -3,23 +3,32 @@ body {
     background-color: #eee;
     font-family: 'Arial', sans-serif;
 }
+
 #map {
-    width: 1200px;
-    height: 900px;
+    cursor: crosshair;
+    width: 800px;
+    height: 600px;
     -webkit-box-shadow: 3px 3px 3px rgba(60, 60, 60, 0.2);
     -moz-box-shadow: 3px 3px 3px rgba(60, 60, 60, 0.2);
     box-shadow: 3px 3px 3px rgba(60, 60, 60, 0.2);
 }
-#info {
-    width: 600px;
-    padding: 1em;
-}
-
 .dot {
     stroke: rgba(255,255,255,.5);
     opacity: 0.6;
 }
-.highlighted {
-    fill: #3182bd;
-    stroke: rgba(0, 0, 0, 1);
+
+#info {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 800px;
+    padding-left: 0.5em;
 }
+#source {
+    font-size: 12px;
+    float: right;
+    display: block;
+    text-anchor: end;
+}
+#time, #mag, #place { color: #555; }
+#mag span { color: black; }
